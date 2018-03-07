@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from led_tester import utils
+import utils
+import re
+
 """Main module."""
 class LEDTester:
     lights = None
@@ -9,30 +11,55 @@ class LEDTester:
         self.instructions = instructions
         self.operations(self)
     
-    def operations(self):
+    def operations(self, instructions):
         for i in self.instructions:
-            command, start, end = #regex here
+            command, start, end = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*") 
             self.apply(self, command, start, end)
     
     def apply(self, command, start, end):
-        if command == "turn on"
+        if command == "turn on":
             self.turnon(self, start, end)
-        elif command == 'turn off'
+            
+        elif command == 'turn off':
             self.turnoff(self, start, end)
-        elif command == 'switch'
+            
+        elif command == 'switch':
             self.switch(self, start, end)
             
-    def turnon(self, start, end):
-        for i in range():
-            for j in range():
-            
-        
+    def turnon(self,start, end):
+        for i in range (len(self.lights)):
+            for j in range (len(self.lights)):
+                if self.lights[i][j] == False:
+                    self.lights[i][j] = True
+                           
     def turnoff(self, start, end):
+        for i in range (len(self.lights)):
+            for j in range (len(self.lights)):
+                if self.lights[i][j] == True:
+                    self.lights[i][j] = False
+                           
+       
         
     def switch(self, start, end):
-    
-    def countOccupied(self):
-        return count
+        for i in range (len(self.lights)):
+            for j in range (len(self.lights)):
+                if self.lights[i][j] == False:
+                    self.lights[i][j] = True       
+                else:
+                    self.lights[i][j] == True
+                    self.lights[i][j] = False
+
+    def countOccupied(self, T):
+        self.T = 0
+        
+        for i in range (len(self.lights)):
+            for j in range (len(self.lights)):
+                if self.lights[i][j] == True:
+                    T += 1
+        print(self.T)
+        return self.T
+
+        
     
     
 

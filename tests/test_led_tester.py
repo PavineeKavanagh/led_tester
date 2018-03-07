@@ -28,4 +28,8 @@ class tests(unittest.TestCase):
         print()
         assert instructions == ['turn on 0,0 through 9,9\n', 'turn off 0,0 through 9,9\n', 'switch 0,0 through 9,9\n', 'turn off 0,0 through 9,9\n', 'turn on 2,2 through 7,7']
        
-    
+    def test_switch(self):
+        ifile = "C:/Users/Pavinee/led_tester/data/test_data.txt"
+        N, instructions = utils.parseFile(ifile)
+        assert N is not None
+        assert instructions is not None
