@@ -11,10 +11,20 @@ class LEDTester:
         self.instructions = instructions
         self.operations(self)
     
-    def operations(self, instructions):
+    def operations(self, instructions, command):
         for i in self.instructions:
-            command, start, end = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*") 
-            self.apply(self, command, start, end)
+            pattern = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*") 
+            matched = pattern.match(i)
+            self.command = matched.group(1)
+            self.start = matched.group(2), matched.group(3)
+            self.end = matched.group(4), matched.group(5)
+
+            #X1 = matched.group(2)
+            #X2 = matched.group(3)
+            #Y1 = matched.group(4)
+            #Y2 = matched.group(5)
+
+            #self.apply(self, command, start, end)
     
     def apply(self, command, start, end):
         if command == "turn on":
@@ -64,7 +74,7 @@ class LEDTester:
     
 
 def main():
-    ifile = "C:/Users/Pavinee/led_tester/data/test_data.txt"
+    ifile = "C:/Users/Pavinee/led_tester/data/input_assign3.txt"
     N, instructions = utils.parseFile(ifile)
     matrix = LEDTester(N, instructions)
 
