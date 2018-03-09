@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-import utils
+import led_tester.utils
 import re
+import led_tester
+import pprint
 
 """Main module."""
 class LEDTester:
@@ -9,8 +11,16 @@ class LEDTester:
     def __init__(self, N, instructions):
         self.N = N
         self.lights = [[False]*self.N for _ in range(self.N)]
+        #pprint.pprint(self.lights)
         self.instructions = instructions
         self.command = ""
+        self.operations()
+        #pprint.pprint(self.lights)
+        self.count = self.counting()
+        print(self.count)
+
+        
+        #print(self.N)
         
         #self.apply(self)
 #         print(self.lights)
@@ -20,6 +30,7 @@ class LEDTester:
             pattern = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*") 
             matched = pattern.match(i)
             self.command = matched.group(1)
+            print(self.command)
             self.start = matched.group(2), matched.group(3)
             self.end = matched.group(4), matched.group(5)
             if self.command == "turn on":
@@ -28,7 +39,8 @@ class LEDTester:
                 self.turnoff(self.command, self.start, self.end)
             elif self.command == 'switch':
                 self.switch(self.command, self.start, self.end)
-        print(self.command,self.start,self.end)
+        #return (self.get_count)
+        #print(self.command,self.start,self.end)
 
             #X1 = matched.group(2)
             #X2 = matched.group(3)
@@ -48,44 +60,60 @@ class LEDTester:
 #             self.switch(self, start, end)
             
     def turnon(self, command, start, end):
+        #self.countTon = 0
         if self.command == "turn on":
-            for i in range (self.start[0],self.end[0]+1):
-                for j in range (self.start[1],self.end[1]+1):
+            for i in range(int(self.start[0]),int(self.end[0])+1):
+                for j in range(int(self.start[1]),int(self.end[1])+1):
                     self.lights[i][j] = True
+                    #self.countTon += 1
+        #return(self.countTon)
+            #return(countTon)
                    
                            
     def turnoff(self, command, start, end):
         if self.command == 'turn off':
-            for i in range (self.start[0],self.end[0]+1):
-                for j in range (self.start[1],self.end[1]+1):
+            for i in range (int(self.start[0]),int(self.end[0])+1):
+                for j in range (int(self.start[1]),int(self.end[1])+1):
                     self.lights[i][j] = False
                            
        
         
     def switch(self, command, start, end):
         if command == 'switch':
-            for i in range (self.start[0],self.end[0]+1):
-                for j in range (self.start[1],self.end[1]+1):
+            for i in range (int(self.start[0]),int(self.end[0])+1):
+                for j in range (int(self.start[1]),int(self.end[1])+1):
                     self.lights[i][j] = not j
 
-    def countOccupied(self):
-        self.T = 0
-        #self.F = 0
-        for i in range (self.start[0],self.end[0]+1):
-            for j in range (self.start[1],self.end[1]+1):
+
+    def counting(self):
+        T = 0
+        for i in range (self.N):
+            for j in range (self.N):
                 if self.lights[i][j] == True:
-                    self.T +=1
+                    T +=1
         #self.F = self.N * self.N - self.T                          
-        print(self.T)      
-        return self.T
+        return T
 
     
 def main():
     ifile = "C:/Users/Pavinee/led_tester/data/input_assign3.txt"
     N, instructions = utils.parseFile(ifile)
-    print(N, instructions)
+    #print(N, instructions)
     matrix = LEDTester(N, instructions)
-    matrix.countOccupied()
+#     F = 0
+#     T = 0
+# 
+#     for i in range (len(lights)):
+#         for j in range (len(lights)):
+#             if lights[i][j] == False:
+#                 F += 1
+#             elif lights[i][j] == True:
+#                 T += 1
+#     print (F, T)
+    #print(led_tester)
+    #print (self.get_count)
+    
+    #matrix.countOccupied()
     #matrix.turnon()#
     
     
