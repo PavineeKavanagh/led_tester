@@ -18,15 +18,13 @@ led_tester
 
 LED Tester Assignment 3 COMP30670
 
-
-* Free software: GNU General Public License v3
-* Documentation: https://led-tester.readthedocs.io.
-
-
-Features
+To run this project:
 --------
+Install the project: 
+$ pip install git+https://github.com/PavineeKavanagh/led_tester.git
 
-* TODO
+Run using the command below:
+$ led_tester --input http://your url file 
 
 Credits
 -------
