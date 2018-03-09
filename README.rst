@@ -23,7 +23,7 @@ To run this project:
 Install the project: 
 $ pip install git+https://github.com/PavineeKavanagh/led_tester.git
 
-Run using the command below:
+Run using the command:
 $ led_tester --input http://your url file 
 
 Credits
