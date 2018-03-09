@@ -30,7 +30,7 @@ class LEDTester:
             pattern = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*") 
             matched = pattern.match(i)
             self.command = matched.group(1)
-            print(self.command)
+            #print(self.command)
             self.start = matched.group(2), matched.group(3)
             self.end = matched.group(4), matched.group(5)
             if self.command == "turn on":
@@ -82,7 +82,7 @@ class LEDTester:
         if command == 'switch':
             for i in range (int(self.start[0]),int(self.end[0])+1):
                 for j in range (int(self.start[1]),int(self.end[1])+1):
-                    self.lights[i][j] = not j
+                    self.lights[i][j] = not(self.lights[i][j])
 
 
     def counting(self):

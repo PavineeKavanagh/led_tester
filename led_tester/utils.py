@@ -1,11 +1,18 @@
-#led_tester/utils.py
+import urllib.request#led_tester/utils.py
 
 def parseFile(input):
     
-    if input.startswith('http'):
-        #use requests
-        pass
+    if input.startswith("http"):
+        N, instructions = None, []
+        with urllib.request.urlopen(input) as f:
+            N = int(f.readline().decode("utf-8"))
+            for line in f.readlines():
+                line = line.decode()
+                instructions.append(line)
+        return N, instructions
     
+        
+            
     else:
         # read from disk
         N, instructions = None, []
@@ -13,6 +20,5 @@ def parseFile(input):
             N = int(f.readline())
             for line in f.readlines():
                 instructions.append(line)
-        # haven't written the code yet...
         return N, instructions
     return
